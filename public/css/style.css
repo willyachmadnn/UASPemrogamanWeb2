@@ -1,0 +1,46 @@
+/*Login*/
+.form-control:focus {
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.18);
+  border-color: #000000 !important;
+}
+.btn-black {
+    background-color: #0d6dfdc3 !important;
+    border-color: #0d6dfdc3 !important;
+}
+
+.btn-black:hover {
+    background-color: 	#0d6dfd90 !important;
+    border-color: 	#0d6dfd90 !important;
+}
+
+body {
+    font-family: system-ui;
+}
+/*Navbar*/
+.menu-active {
+    color: #fff !important;           /* Lebih terang (putih penuh) */
+    font-weight: 800 !important;      /* Lebih tebal */
+    filter: none;
+}
+
+.menu-inactive {
+    color: #d1eaff !important;        /* Lebih redup (biru-putih soft) */
+    font-weight: 600 !important;
+    opacity: 0.7;
+    background: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    filter: none;
+    transition: color .2s;
+}
+.menu-inactive:hover {
+    color: #fff !important;           /* Lebih terang jika hover */
+    opacity: 1;
+}
+
+
+/*Logout*/
+.modal-backdrop.show {
+    opacity: 0.5 !important;
+    backdrop-filter: blur(3px);
+}
