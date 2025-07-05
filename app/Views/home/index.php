@@ -13,6 +13,13 @@
                     <h3 class="fw-bold mb-0"><?= esc($total_perangkat) ?></h3>
                     <div>TOTAL PERANGKAT</div>
                 </div>
+                <!-- More Info -->
+                <a href="<?= base_url('list') ?>"
+                    class="card-footer d-flex justify-content-between align-items-center text-white text-decoration-none fw-bold bg-transparent border-0"
+                    style="background:rgba(0,0,0,0.05)">
+                    <span>More Info</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
         <!-- Perangkat Aktif -->
@@ -25,6 +32,12 @@
                     <h3 class="fw-bold mb-0"><?= esc($perangkat_aktif) ?></h3>
                     <div>PERANGKAT AKTIF</div>
                 </div>
+                <a href="<?= base_url('laporan') ?>"
+                    class="card-footer d-flex justify-content-between align-items-center text-white text-decoration-none fw-bold bg-transparent border-0"
+                    style="background:rgba(0,0,0,0.05)">
+                    <span>More Info</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
         <!-- Perangkat Tidak Aktif -->
@@ -37,6 +50,12 @@
                     <h3 class="fw-bold mb-0"><?= esc($perangkat_tidak_aktif) ?></h3>
                     <div>PERANGKAT TIDAK AKTIF</div>
                 </div>
+                <a href="<?= base_url('laporan') ?>"
+                    class="card-footer d-flex justify-content-between align-items-center text-white text-decoration-none fw-bold bg-transparent border-0"
+                    style="background:rgba(0,0,0,0.05)">
+                    <span>More Info</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
         <!-- Masuk/Keluar (Transaksi/Riwayat) -->
@@ -49,6 +68,12 @@
                     <h3 class="fw-bold mb-0"><?= esc($total_riwayat) ?></h3>
                     <div>MASUK/KELUAR</div>
                 </div>
+                <a href="<?= base_url('riwayat') ?>"
+                    class="card-footer d-flex justify-content-between align-items-center text-white text-decoration-none fw-bold bg-transparent border-0"
+                    style="background:rgba(0,0,0,0.05)">
+                    <span>More Info</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
