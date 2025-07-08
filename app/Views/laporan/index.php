@@ -26,36 +26,36 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var categories = <?= json_encode(array_column($pieData ?? [], 'category_name')) ?>;
-    var totals = <?= json_encode(array_column($pieData ?? [], 'total')) ?>;
+var categories = <?= json_encode(array_column($pieData ?? [], 'category_name')) ?>;
+var totals = <?= json_encode(array_column($pieData ?? [], 'total')) ?>;
 
-    var ctx = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: categories,
-            datasets: [{
-                data: totals,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'right',
-                    align: 'center',
-                    labels: {
-                        boxWidth: 20,
-                        padding: 15,
-                        font: {
-                            size: 14
-                        }
+var ctx = document.getElementById('pieChart').getContext('2d');
+var pieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: categories,
+        datasets: [{
+            data: totals,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'right',
+                align: 'center',
+                labels: {
+                    boxWidth: 20,
+                    padding: 15,
+                    font: {
+                        size: 14
                     }
                 }
             }
         }
-    });
+    }
+});
 </script>
 <?= $this->endSection() ?>

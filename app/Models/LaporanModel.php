@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+namespace App\Models;
 use App\Models\DaftarModel;
 
 class LaporanModel extends BaseController // <--- harus 'Laporan' bukan 'LaporanModel'
