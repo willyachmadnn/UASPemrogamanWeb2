@@ -1,4 +1,4 @@
-/*Login*/
+
 .form-control:focus {
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.18);
   border-color: #000000 !important;
@@ -12,19 +12,45 @@
     background-color: 	#0d6dfd90 !important;
     border-color: 	#0d6dfd90 !important;
 }
+html {
+  overflow-y: scroll;
+}
+
+
+body.modal-open {
+  padding-right: 0 !important;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1050;
+    background: #4698ff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,.07);
+    border-bottom: 1px solid #1976d2;
+}
+body {
+    padding-top: 76px;
+}
+
 
 body {
-    font-family: system-ui;
+    padding-top: 70px;
 }
-/*Navbar*/
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
 .menu-active {
-    color: #fff !important;           /* Lebih terang (putih penuh) */
-    font-weight: 800 !important;      /* Lebih tebal */
+    color: #fff !important;
     filter: none;
 }
 
 .menu-inactive {
-    color: #d1eaff !important;        /* Lebih redup (biru-putih soft) */
+    color: #d1eaff !important;
     font-weight: 600 !important;
     opacity: 0.7;
     background: none !important;
@@ -34,12 +60,12 @@ body {
     transition: color .2s;
 }
 .menu-inactive:hover {
-    color: #fff !important;           /* Lebih terang jika hover */
+    color: #fff !important;
     opacity: 1;
 }
 
 
-/*Logout*/
+
 .modal-backdrop.show {
     opacity: 0.5 !important;
     backdrop-filter: blur(3px);

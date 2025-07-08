@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>FiberAsset</title>
+    <title>MyVent</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
@@ -30,13 +30,12 @@
                 <div class="row mb-2" style="min-height: 36px;">
                     <div class="col">
                         <?php if (session()->getFlashdata('error')): ?>
-                        <div class="alert alert-danger text-center py-1 mb-0">
-                            <?= session()->getFlashdata('error'); ?>
-                        </div>
+                            <div class="alert alert-danger text-center py-1 mb-0">
+                                <?= session()->getFlashdata('error'); ?>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
-
                 <div class="mb-3">
                     <div class="position-relative">
                         <input type="text" class="form-control form-control-lg rounded-pill border-2 border-black ps-5 "

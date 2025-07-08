@@ -1,5 +1,7 @@
 <?php
 namespace App\Controllers;
+use App\Models\KategoriModel;
+use App\Models\DaftarModel;
 
 class Home extends BaseController
 {
@@ -8,12 +10,17 @@ class Home extends BaseController
         if (!session('username')) {
             return redirect()->to('/login');
         }
-        // Data dummy, nanti bisa diganti dari database
-        $data['total_perangkat'] = 123;
-        $data['perangkat_aktif'] = 100;
-        $data['perangkat_tidak_aktif'] = 23;
-        $data['total_riwayat'] = 45;
+        $kategoriModel = new KategoriModel();
+        $daftarModel = new DaftarModel();
 
+        $data['kategori'] = $kategoriModel->countAllResults();
+        $data['total_perangkat'] = $daftarModel->countAllResults();
+        $data['perangkat_aktif'] = $daftarModel
+            ->where('status', 'Aktif')
+            ->countAllResults();
+        $data['perangkat_tidak_aktif'] = $daftarModel
+            ->like('status', 'Tidak Aktif', 'both')
+            ->countAllResults();
         $data['username'] = session('username');
         $data['active'] = 'home';
         return view('home/index', $data);

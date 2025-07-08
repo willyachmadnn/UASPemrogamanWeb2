@@ -4,14 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FiberAsset</title>
+    <title>MyVent</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d6dfdc3;">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" style="letter-spacing:1px;">
                 NetVentory
@@ -34,15 +35,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-bold <?= (isset($active) && $active == 'riwayat' ? 'menu-active' : 'menu-inactive') ?>"
-                            href="/riwayat">
-                            Riwayat
+                        <a class="nav-link fw-bold <?= (isset($active) && $active == 'kategori' ? 'menu-active' : 'menu-inactive') ?>"
+                            href="/kategori">
+                            Category
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold <?= (isset($active) && $active == 'laporan' ? 'menu-active' : 'menu-inactive') ?>"
                             href="/laporan">
-                            Laporan
+                            Statistik Perangkat
                         </a>
                     </li>
                     <li class="nav-item">
@@ -52,14 +53,11 @@
                         </a>
                     </li>
                 </ul>
-
-                <!-- User Info & Logout (Right side) -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item me-2 d-flex align-items-center text-white me-4">
                         <i class="bi bi-person-circle fs-5"></i>
                         <span class="ms-1 fw-bold"><?= session('username'); ?></span>
                     </li>
-                    <!-- Tombol Logout -->
                     <li class="nav-item">
                         <a class="btn btn-danger fw-bold px-3 ms-2" data-bs-toggle="modal" data-bs-target="#logoutModal"
                             href="#">
@@ -70,12 +68,12 @@
             </div>
         </div>
     </nav>
-    <!--Logout-->
+
+
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-rectangle">
             <div class="modal-content border-0 shadow-lg rounded-4">
-                <div class="modal-body text-center bg-white px-5 py-3">
-                    <!-- px-5: padding kanan kiri besar, py-3: padding atas bawah kecil -->
+                <div class="modal-body text-center bg-white px-5 py-3 rounded-pill">
                     <div class="mb-2">
                         <i class="bi bi-box-arrow-right" style="font-size:2.5rem; color:#dc3545"></i>
                     </div>
@@ -103,20 +101,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 
     <script>
-    function previewImg() {
-        const sampul = document.querySelector('#sampul');
-        const sampulLabel = document.querySelector('.input-group-text');
-        const imgPreview = document.querySelector('.img-preview');
+        function previewImg() {
+            const sampul = document.querySelector('#sampul');
+            const sampulLabel = document.querySelector('.input-group-text');
+            const imgPreview = document.querySelector('.img-preview');
 
-        sampulLabel.textContent = sampul.files[0].name;
+            sampulLabel.textContent = sampul.files[0].name;
 
-        const fileSampul = new FileReader();
-        fileSampul.readAsDataURL(sampul.files[0]);
+            const fileSampul = new FileReader();
+            fileSampul.readAsDataURL(sampul.files[0]);
 
-        fileSampul.onload = function(e) {
-            imgPreview.src = e.target.result;
+            fileSampul.onload = function (e) {
+                imgPreview.src = e.target.result;
+            }
         }
-    }
     </script>
 </body>
 
