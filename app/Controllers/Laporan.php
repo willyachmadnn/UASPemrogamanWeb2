@@ -7,11 +7,13 @@ class Laporan extends BaseController
     public function index()
     {
         $daftarModel = new DaftarModel();
-        $pieData = $daftarModel->getKategoriWithTotal();
-
+        $status = $this->request->getGet('status');
+        $pieData = $daftarModel->getKategoriWithTotal($status);
         $data['active'] = 'laporan';
         $data['pieData'] = $pieData;
+        $data['status'] = $status;
 
         return view('laporan/index', $data);
     }
+
 }

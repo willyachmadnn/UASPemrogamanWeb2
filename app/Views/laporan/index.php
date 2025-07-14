@@ -2,14 +2,27 @@
 
 <?= $this->section('content') ?>
 <div class="container py-4">
-    <h2 class="mb-4 fw-bold">Diagram Pie Data Perangkat</h2>
+    <h2 class="mb-4 fw-bold text-black">Diagram Pie Data Perangkat</h2>
+    <form method="get" class="mb-4 d-flex flex-wrap gap-2 align-items-center">
+        <label for="status" class="mb-0 me-2 fw-semibold">Status</label>
+        <select class="form-select border-black" id="status" name="status" style="max-width: 180px;"
+            onchange="this.form.submit()">
+            <option value="">Semua</option>
+            <option value="Aktif" <?= (isset($_GET['status']) && $_GET['status'] == 'Aktif') ? 'selected' : '' ?>>Aktif
+            </option>
+            <option value="Tidak Aktif"
+                <?= (isset($_GET['status']) && $_GET['status'] == 'Tidak Aktif') ? 'selected' : '' ?>>Tidak Aktif
+            </option>
+        </select>
+    </form>
+
     <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow mb-4">
-                <div class="card-header text-center bg-primary text-white">
+        <div class="col-lg-9 col-md-11">
+            <div class="card shadow mb-4 border-0">
+                <div class="card-header text-center bg-primary text-white rounded-top-3">
                     <b>Diagram Pie Total Perangkat/Kategori</b>
                 </div>
-                <div class="card-body">
+                <div class="card-body bg-light">
                     <div class="text-center mb-3">
                         <small class="text-muted">Menampilkan proporsi perangkat berdasarkan kategori
                             <b>Router</b>.</small>

@@ -25,13 +25,21 @@ class DaftarModel extends Model
             ->join('jenis_router', 'jenis_router.id = perangkat.category_id', 'left');
     }
 
-    public function getKategoriWithTotal()
+    public function getKategoriWithTotal($status = null)
     {
-        return $this->select('perangkat.category_id, jenis_router.jenis_router as category_name, COUNT(perangkat.id) as total, MIN(perangkat.gambar) as gambar')
-            ->join('jenis_router', 'jenis_router.id = perangkat.category_id', 'left')
-            ->groupBy('perangkat.category_id')
-            ->orderBy('jenis_router.jenis_router', 'ASC')
-            ->findAll();
+        $builder = $this->db->table('perangkat');
+        $builder->select('jenis_router.jenis_router as category_name, perangkat.category_id, MIN(perangkat.gambar) as gambar, COUNT(*) as total');
+        $builder->join('jenis_router', 'jenis_router.id = perangkat.category_id');
+
+        if ($status && in_array($status, ['Aktif', 'Tidak Aktif'])) {
+            $builder->where('perangkat.status', $status);
+        }
+
+        $builder->groupBy('perangkat.category_id, jenis_router.jenis_router');
+        $builder->orderBy('jenis_router.jenis_router', 'ASC');
+        $query = $builder->get();
+
+        return $query->getResultArray();
     }
 
 }

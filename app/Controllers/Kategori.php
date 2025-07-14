@@ -22,7 +22,11 @@ class Kategori extends BaseController
 
     public function store()
     {
-        $jenis_router = $this->request->getPost('jenis_router');
+        $jenis_router = trim($this->request->getPost('jenis_router'));
+        if (empty($jenis_router)) {
+            session()->setFlashdata('error', 'Nama jenis router wajib diisi!');
+            return redirect()->to('/kategori');
+        }
         $ada = $this->jenisRouterModel->where('jenis_router', $jenis_router)->first();
         if ($ada) {
             session()->setFlashdata('error', 'Jenis router <b>' . esc($jenis_router) . '</b> sudah ada!');
@@ -35,7 +39,12 @@ class Kategori extends BaseController
 
     public function update($id)
     {
-        $jenis_router = $this->request->getPost('jenis_router');
+        $jenis_router = trim($this->request->getPost('jenis_router'));
+
+        if (empty($jenis_router)) {
+            session()->setFlashdata('error', 'Nama jenis router wajib diisi!');
+            return redirect()->to('/kategori');
+        }
         $exists = $this->jenisRouterModel
             ->where('jenis_router', $jenis_router)
             ->where('id !=', $id)
@@ -45,7 +54,7 @@ class Kategori extends BaseController
             return redirect()->to('/kategori');
         }
         $this->jenisRouterModel->update($id, ['jenis_router' => $jenis_router]);
-        session()->setFlashdata('message', 'Jenis router berhasil diupdate.');
+        session()->setFlashdata('message', 'Jenis router tersebut berhasil diupdate.');
         return redirect()->to('/kategori');
     }
 

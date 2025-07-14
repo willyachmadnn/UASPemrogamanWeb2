@@ -26,6 +26,7 @@ class Daftar extends BaseController
     public function store()
     {
         $perangkatModel = new DaftarModel();
+        $jenisRouterModel = new JenisRouterModel();
 
         $validation = \Config\Services::validation();
         $rules = [
@@ -47,23 +48,20 @@ class Daftar extends BaseController
             $gambar->move('uploads', $fileName);
         }
 
+        $categoryId = $this->request->getPost('category_id');
+        $kategori = $jenisRouterModel->find($categoryId);
+
         $perangkatModel->save([
-            'category_id' => $this->request->getPost('category_id'),
+            'category_id' => $categoryId,
             'mac_address' => $this->request->getPost('mac_address'),
             'status' => $this->request->getPost('status'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'gambar' => $fileName,
         ]);
+        $namaKategori = $kategori ? $kategori['jenis_router'] : '(Kategori tidak ditemukan)';
+        $pesan = 'Data perangkat kategori <b>' . esc($namaKategori) . '</b> berhasil ditambah.';
 
-        return redirect()->to('/daftar')->with('message', 'Data perangkat berhasil ditambah.');
-    }
-
-    public function detail($id)
-    {
-        $perangkatModel = new DaftarModel();
-        $data['perangkat'] = $perangkatModel->withCategory()->find($id);
-        $data['active'] = 'daftar';
-        return view('daftar/detail', $data);
+        return redirect()->to('/daftar')->with('message', $pesan);
     }
 
     public function edit($id)
@@ -96,7 +94,7 @@ class Daftar extends BaseController
         $perangkat = $perangkatModel->find($id);
 
         if (!$perangkat) {
-            return redirect()->to('/list')->with('error', 'Data perangkat tidak ditemukan!');
+            return redirect()->to('/list')->with('error', 'Perangkat tidak ditemukan!');
         }
 
         $validation = \Config\Services::validation();
@@ -105,19 +103,18 @@ class Daftar extends BaseController
             'mac_address' => 'required',
             'status' => 'required',
             'deskripsi' => 'required',
-            'gambar' => 'uploaded[gambar]|is_image[gambar]|max_size[gambar,2048]'
+            'gambar' => 'if_exist|is_image[gambar]|max_size[gambar,2048]'
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('error', 'Semua field wajib diisi & gambar harus dipilih!');
+            return redirect()->back()->withInput()->with('error', 'Semua field wajib diisi & gambar harus gambar valid!');
         }
 
         $gambar = $this->request->getFile('gambar');
-        $fileName = null;
+        $fileName = $perangkat['gambar'];
         if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
             $fileName = $gambar->getRandomName();
             $gambar->move('uploads', $fileName);
-
             if (!empty($perangkat['gambar']) && file_exists('uploads/' . $perangkat['gambar'])) {
                 unlink('uploads/' . $perangkat['gambar']);
             }
@@ -140,8 +137,7 @@ class Daftar extends BaseController
                 $queryString = isset($parts['query']) ? '?' . $parts['query'] : '';
             }
         }
-
-        return redirect()->to('/list' . $queryString)->with('message', 'Data perangkat berhasil diupdate.');
+        return redirect()->to('/list' . $queryString)->with('message', 'Perangkat tersebut berhasil diupdate.');
     }
 
     public function delete($id)
@@ -154,9 +150,9 @@ class Daftar extends BaseController
                 unlink('uploads/' . $data['gambar']);
             }
             $perangkatModel->delete($id);
-            session()->setFlashdata('message', 'Data perangkat berhasil dihapus.');
+            session()->setFlashdata('message', 'Perangkat tersebut berhasil dihapus.');
         } else {
-            session()->setFlashdata('error', 'Data tidak ditemukan!');
+            session()->setFlashdata('error', 'Perangkat tidak ditemukan!');
         }
         $referer = $this->request->getServer('HTTP_REFERER');
         $queryString = '';

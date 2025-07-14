@@ -9,25 +9,25 @@
     </div>
     <div style="min-height: 34px;" class="mb-2">
         <?php if (!empty($message)): ?>
-            <?php
+        <?php
             $msg = $message;
             $class = (stripos($msg, 'hapus') !== false || stripos($msg, 'dihapus') !== false) ? 'alert-danger' : 'alert-success';
             ?>
-            <div class="alert <?= $class ?> small mb-0 d-inline-block"
-                style="font-size: 0.95rem; line-height:1.2; margin-bottom: 0; padding: 4px 12px; min-height: 28px;">
-                <?= $msg ?>
-            </div>
+        <div class="alert <?= $class ?> small mb-0 d-inline-block"
+            style="font-size: 0.95rem; line-height:1.2; margin-bottom: 0; padding: 4px 12px; min-height: 28px;">
+            <?= $msg ?>
+        </div>
         <?php endif ?>
         <?php if (!empty($error)): ?>
-            <div class="alert alert-danger small mb-0 d-inline-block"
-                style="font-size: 0.95rem; line-height:1.2; margin-bottom: 0; padding: 4px 12px; min-height: 28px;">
-                <?= $error ?>
-            </div>
+        <div class="alert alert-danger small mb-0 d-inline-block"
+            style="font-size: 0.95rem; line-height:1.2; margin-bottom: 0; padding: 4px 12px; min-height: 28px;">
+            <?= $error ?>
+        </div>
         <?php endif ?>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered align-middle mb-0">
-            <thead class="table-light">
+        <table class="table table-bordered border-black align-middle mb-0">
+            <thead class="table-bordered border-black">
                 <tr>
                     <th style="width:60px; text-align:center;">No</th>
                     <th style="width:220px;">Jenis Router</th>
@@ -37,21 +37,21 @@
             <tbody>
                 <?php $no = 1;
                 foreach ($jenis_router as $row): ?>
-                    <tr>
-                        <td class="text-center"><?= $no++ ?></td>
-                        <td><?= esc($row['jenis_router']) ?></td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm btn-edit" data-id="<?= $row['id'] ?>"
-                                data-jenis_router="<?= esc($row['jenis_router']) ?>" data-bs-toggle="modal"
-                                data-bs-target="#editRouterModal">
-                                Edit
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm btn-delete"
-                                data-delete-url="<?= base_url('kategori/delete/' . $row['id']) ?>">
-                                Hapus
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="text-center"><?= $no++ ?></td>
+                    <td><?= esc($row['jenis_router']) ?></td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning btn-sm btn-edit" data-id="<?= $row['id'] ?>"
+                            data-jenis_router="<?= esc($row['jenis_router']) ?>" data-bs-toggle="modal"
+                            data-bs-target="#editRouterModal">
+                            Edit
+                        </button>
+                        <a href="#" class="btn btn-danger btn-sm btn-delete"
+                            data-delete-url="<?= base_url('kategori/delete/' . $row['id']) ?>">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
@@ -126,33 +126,33 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var deleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-        var btnDelete = document.getElementById('btn-delete');
+document.addEventListener('DOMContentLoaded', function() {
+    var deleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    var btnDelete = document.getElementById('btn-delete');
 
-        document.querySelectorAll('.btn-delete').forEach(function (button) {
-            button.addEventListener('click', function (e) {
-                e.preventDefault();
-                var url = this.getAttribute('data-delete-url');
-                btnDelete.setAttribute('href', url);
-                deleteModal.show();
-            });
-        });
-
-        var formEdit = document.getElementById('form-edit');
-        var inputId = document.getElementById('edit_id');
-        var inputJenisRouter = document.getElementById('edit_jenis_router');
-
-        document.querySelectorAll('.btn-edit').forEach(function (button) {
-            button.addEventListener('click', function () {
-                var id = this.getAttribute('data-id');
-                var jenis_router = this.getAttribute('data-jenis_router');
-                formEdit.setAttribute('action', "<?= base_url('kategori/update/') ?>" + id);
-                inputId.value = id;
-                inputJenisRouter.value = jenis_router;
-            });
+    document.querySelectorAll('.btn-delete').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            var url = this.getAttribute('data-delete-url');
+            btnDelete.setAttribute('href', url);
+            deleteModal.show();
         });
     });
+
+    var formEdit = document.getElementById('form-edit');
+    var inputId = document.getElementById('edit_id');
+    var inputJenisRouter = document.getElementById('edit_jenis_router');
+
+    document.querySelectorAll('.btn-edit').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-id');
+            var jenis_router = this.getAttribute('data-jenis_router');
+            formEdit.setAttribute('action', "<?= base_url('kategori/update/') ?>" + id);
+            inputId.value = id;
+            inputJenisRouter.value = jenis_router;
+        });
+    });
+});
 </script>
 
 <?= $this->endSection() ?>
